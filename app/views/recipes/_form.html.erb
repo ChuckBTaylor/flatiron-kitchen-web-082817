@@ -1,0 +1,11 @@
+
+<%= form_for recipe do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <% Ingredient.all.each do |ingredient| %>
+    <%= f.label :ingredient_names, {value:"#{ingredient.name}"} %>
+    <%= f.check_box :ingredient_names, {name:'recipe[ingredient_names][]', id:"#{ingredient.name}", checked:(true if @recipe.ingredients.include?(ingredient))}, checked_value = "#{ingredient.name}", unchecked_value = nil %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
